@@ -6,7 +6,7 @@
 ![Safety Flow](https://github.com/recursifist/FrameworkZeroDoc/blob/ed0d7bf3f0ef17128a29416a628a2155caa73161/safetyflow.png)
 
 ### Framework Flow
-![Framework Flow](https://github.com/recursifist/FrameworkZeroDoc/blob/d94a64507dce175c5181db0174f7ab2fceca9a5f/flow.png)
+![Framework Flow](https://github.com/recursifist/TAIG-DAO/blob/853a9bdffc9f040c2678a729a27a9cd3599d71b0/flow.png)
 
 ### Components
 ![Data Entities](https://github.com/recursifist/FrameworkZeroDoc/blob/ed0d7bf3f0ef17128a29416a628a2155caa73161/architecture.png)
