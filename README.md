@@ -1,9 +1,6 @@
-# AI Safety FrameworkZero
+# TAIG DAO
 ## Foundational International Hybrid-Technical AI Safety Standards
 #### The Tools & Infrastructure for AI Safety Governance
-
-Repo for the public website.
-[www.FrameworkZero.org](https://www.FrameworkZero.org)
 
 ### Safety Flow
 ![Safety Flow](https://github.com/recursifist/FrameworkZeroDoc/blob/ed0d7bf3f0ef17128a29416a628a2155caa73161/safetyflow.png)

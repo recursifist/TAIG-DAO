@@ -1,823 +1,819 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" href="fav.svg" type="image/x-icon">
-  <title>FrameworkZero.org</title>
-  <meta property="og:image" content="og-banner.png" />
-  <meta property="og:image:width" content="600" />
-  <meta property="og:image:height" content="300" />
-  <meta property="og:image:alt" content="Providing the Tools & Infrastructure to establish International Hybrid-Technical AI Safety Standards - FrameworkZero.org" />
-  <link href="style.min.css" rel="stylesheet">
-  <script src="scripts.js" defer async></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#e8e9ef">
+<link rel="icon" href="fav.svg" type="image/svg+xml">
+<title>TAIG-DAO | The Tools &amp; Infrastructure for AI Safety Governance</title>
+<meta property="og:image" content="og-banner.png" />
+<meta property="og:image:width" content="600" />
+<meta property="og:image:height" content="300" />
+<meta property="og:image:alt" content="Providing the Tools &amp; Infrastructure to establish International Hybrid-Technical AI Safety Standards - TAIG-DAO" />
+<style>
+:root{
+  --bg:#f7f7f7;--bg2:#ebebeb;--ink:#3B3B3B;--body:#1d1d1d;
+  --mut:#666867;--line:#D3D3D3;
+  --hi:#ffe96a;--acc:#f1c157;--hd:#0d3d23;
+  --gut:clamp(16px,4vw,40px);--max:1200px;
+  --head:"Avenir Next",Avenir,"Century Gothic",Futura,"Trebuchet MS","Segoe UI",system-ui,sans-serif;
+  --sans:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;
+  color-scheme:light}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-padding-top:80px}
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+body{margin:0;background:var(--bg);color:var(--body);font:400 17px/1.7 var(--sans);-webkit-font-smoothing:antialiased;overflow-wrap:break-word}
+@media (min-width:1100px){body{font-size:18px}}
+img{display:block;max-width:100%;height:auto; filter: invert(1) saturate(0) contrast(1.1);}
+a{color:inherit}
+strong,b{font-weight:700;color:var(--ink)}
+::selection{background:var(--hi);color:var(--ink)}
+:focus-visible{outline:2px solid var(--acc);outline-offset:3px}
+.wrap{width:min(100% - 2*var(--gut),var(--max));margin-inline:auto}
+
+/* header */
+.top{position:sticky;top:0;z-index:40;background:var(--bg);border-bottom:1px solid var(--line)}
+.bar{display:flex;align-items:center;justify-content:space-between;height:68px}
+.brand{display:flex;align-items:center;gap:12px;color:var(--ink);text-decoration:none;font:700 17px/1 var(--head);letter-spacing:.05em;text-transform:uppercase}
+.brand .ver{font:500 12px/1 var(--mono);letter-spacing:.02em;color:var(--mut);text-transform:none}
+.menu{position:relative}
+.menu summary{list-style:none;cursor:pointer;width:44px;height:44px;display:grid;place-items:center;border:1px solid var(--ink);background:var(--bg);color:var(--ink)}
+.menu summary::-webkit-details-marker{display:none}
+.menu summary i{display:block;width:20px;height:2px;background:currentColor;box-shadow:0 -6px currentColor,0 6px currentColor}
+.menu summary:hover,.menu[open] summary{background:var(--ink);color:var(--bg)}
+.menu nav{position:absolute;right:0;top:calc(100% + 10px);width:min(320px,calc(100vw - 2*var(--gut)));max-height:calc(100vh - 100px);max-height:calc(100dvh - 100px);overflow:auto;background:var(--bg);border:1px solid var(--ink)}
+.menu .v{padding:12px 16px;font:500 12px/1.2 var(--mono);color:var(--mut)}
+.menu nav a{display:block;padding:13px 16px;border-top:1px solid var(--line);color:var(--ink);text-decoration:none;font:600 15px/1.3 var(--head)}
+.menu nav a:hover{background:var(--bg2)}
+
+/* sections */
+.sec{border-top:1px solid var(--ink);padding-block:clamp(48px,8vw,104px)}
+.alt{background:var(--bg2)}
+h2{margin:0;font:700 clamp(30px,4.4vw,56px)/1.04 var(--head);letter-spacing:-.03em;color:var(--hd)}
+.split{display:grid;gap:clamp(24px,4vw,64px)}
+.stack>h2{margin-bottom:clamp(28px,4vw,52px)}
+@media (min-width:900px){
+  .split{grid-template-columns:minmax(0,5fr) minmax(0,7fr)}
+  .split>:first-child{position:sticky;top:100px;align-self:start}
+}
+
+/* hero */
+.hero{border-top:0;padding-block:clamp(56px,10vw,20px) 0;text-align:left}
+.hero h1{max-width:80ch;margin:0 0.3em;font-family:var(--head);font-weight:800;line-height:1.02;letter-spacing:-.035em;color:var(--ink)}
+.hero h1>span{display:block}
+.h1a,.h1c{font-size:clamp(40px,9vw,104px);color:var(--hd)}
+.h1b{font-size:clamp(10px,5vw,46px);font-weight:400;color:var(--acc);letter-spacing:0;margin:.3em 0 .3em}
+.h1b .nw{white-space:nowrap}
+.box{display:inline-block;border:2px solid var(--acc);padding:.2em .3em}
+.sub{padding-left: 0.3em; text-wrap:balance;font:400 clamp(18px,1.9vw,23px)/1.4 var(--sans);color:var(--mut)}
+.banner{padding:clamp(40px,6vw,76px) 0}
+.banner img{width:100%;border:1px solid var(--ink)}
+
+/* text */
+.lede{margin:0;font:700 clamp(26px,3.4vw,44px)/1.12 var(--head);letter-spacing:-.025em;color:var(--hd)}
+.prose p{margin:0 0 1.15em;max-width:68ch}
+.prose>:last-child{margin-bottom:0}
+.hl{background:var(--hi);color:var(--ink);font-weight:600;padding:0 .18em;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.prose h3{display:flex;align-items:center;gap:.55em;margin:1.7em 0 .5em;font:700 clamp(22px,2.2vw,28px)/1.2 var(--head);letter-spacing:-.015em;color:var(--hd)}
+.prose h3:first-child{margin-top:0}
+.prose h3::before{content:"";flex:none;width:.5em;height:.5em;background:var(--acc)}
+.k{display:block;margin-bottom:.2em;font:700 1.12rem/1.3 var(--head);letter-spacing:-.005em;color:var(--hd)}
+.lg{font-size:1.15em}
+.bul{list-style:disc;margin:.5em 0 1.15em;padding-left:1.3em;max-width:68ch}
+.bul li+li{margin-top:.55em}
+.bul li::marker{color:var(--acc)}
+.bul .bul{margin-bottom:0}
+.wide{max-width:none}
+.exlink{white-space:nowrap;text-decoration:underline 1px var(--acc);text-underline-offset:4px;padding-right:.9em;position:relative}
+.exlink::after{content:"\2197";content:"\2197" / "";position:absolute;right:0;font-size:.85em}
+.exlink:hover{background:var(--hi)}
+.aboutrow{display:flex;gap:clamp(16px,3vw,32px);align-items:center;margin:0 0 1.4em}
+.aboutrow p{margin:0}
+.quote{display:block;margin-top:.7em;padding-left:1em;border-left:3px solid var(--acc)}
+
+/* terms with tooltips */
+.tp{cursor:pointer;text-decoration:underline dotted var(--acc);text-decoration-thickness:2px;text-underline-offset:4px;border-radius:2px}
+.tp:hover,.tp.on{background:var(--hi);text-decoration-style:solid}
+
+/* ruled cells */
+.stmt{margin:0 0 clamp(20px,3vw,32px);border:2px solid var(--acc);padding:clamp(20px,3vw,36px);font:700 clamp(22px,2.7vw,34px)/1.18 var(--head);letter-spacing:-.02em;color:var(--ink)}
+.cells{display:grid;border-top:1px solid var(--ink);border-left:1px solid var(--ink)}
+.cells>*{margin:0;padding:clamp(18px,2.4vw,28px);border-right:1px solid var(--ink);border-bottom:1px solid var(--ink)}
+.cells>div p{margin:0 0 .9em}
+.cells>div p:last-child{margin-bottom:0}
+.c2{grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr))}
+.c2>p{font-weight:600;color:var(--ink)}
+.c3{grid-template-columns:1fr;font-size:16px;line-height:1.65}
+@media (min-width:640px){.c3{grid-template-columns:repeat(2,1fr)}.c3>:last-child:nth-child(odd){grid-column:1/-1}}
+@media (min-width:1000px){.c3{grid-template-columns:repeat(3,1fr)}.c3>:last-child:nth-child(odd){grid-column:auto}.c3>:last-child:nth-child(3n+1){grid-column:1/-1}.c3>:last-child:nth-child(3n+2){grid-column:span 2}}
+.c3>:last-child p{max-width:72ch}
+.c4{grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr))}
+.c4 .bul{max-width:none;margin-bottom:0}
+
+/* flow steps */
+.steps{display:grid;gap:0 clamp(24px,4vw,64px)}
+@media (min-width:900px){.steps{grid-template-columns:1fr 1fr}}
+.steps ol{list-style:none;margin:0;padding:0}
+.steps li{padding:22px 0 26px;border-top:1px solid var(--ink)}
+.steps li p{margin:0 0 1em}
+.steps li>:last-child{margin-bottom:0}
+.steps .k{font-size:1.2rem;margin-bottom:.4em}
+
+/* appendix */
+.apx{list-style:none;margin:0;padding:0}
+.apx li{padding:24px 0 28px;border-top:1px solid var(--ink)}
+.apx li:first-child{padding-top:0;border-top:0}
+.apx li p{margin:0 0 1em}
+.apx li>:last-child{margin-bottom:0}
+.apx .k{font-size:1.25rem}
+
+/* figures */
+.fig{display:block;margin:clamp(20px,3vw,36px) 0;}
+.fig:hover{outline:1px solid var(--acc);outline-offset:3px}
+.fig.sm{max-width:672px}
+@media (min-width:1024px){.fig{cursor:zoom-in}}
+#lb{position:fixed;inset:0;z-index:99;display:flex;background:rgba(27,27,28,.94);cursor:zoom-out}
+#lb[hidden]{display:none}
+#lb img{width:100%;height:100%;object-fit:contain}
+#lb::after{content:"close";position:absolute;right:20px;bottom:16px;color:var(--bg);font:500 14px/1 var(--mono)}
+
+/* tooltip bar */
+#tp{position:fixed;left:0;right:0;bottom:0;z-index:60;max-height:40vh;overflow:auto;padding:18px var(--gut) 22px;background:var(--ink);color:var(--bg);border-top:3px solid var(--hi);font:400 15px/1.6 var(--sans)}
+#tp[hidden]{display:none}
+#tp p{margin:0 auto;max-width:var(--max)}
+
+/* footer */
+footer{padding:30px var(--gut);background:var(--ink);color:var(--bg);text-align:center;font:500 14px/1.7 var(--mono);letter-spacing:.04em}
+footer strong{color:var(--bg)}
+footer .sep{margin:0 .6em}
+
+@media (max-width:420px){.brand{font-size:15px;gap:9px}.brand .ver{display:none}}
+</style>
 </head>
 
-<body class="text-gray-200 subpixel-antialiased">
-  <div class="background-grad fixed top-0 bottom-0 right-0 left-0"></div>
+<body id="top">
 
-  <div id="img-box" class="invisible"><img /></div>
-
-  <div id="tp-container" class="invisible fixed bottom-0 left-0 right-0 py-6 px-6 md:px-24 z-50
-      text-base text-center text-white border-t-2 secondary-b
-      max-h-36 overflow-y-auto shadow-lg">
+<header class="top">
+  <div class="wrap bar">
+    <a class="brand" href="#intro"><span>TAIG-DAO</span> <span class="ver">v3.0</span></a>
+    <details class="menu" id="menu">
+      <summary aria-label="Menu"><i></i></summary>
+      <nav>
+        <div class="v">Version 3.0</div>
+        <a href="#intro">Introduction</a>
+        <a href="#purpose">Purpose</a>
+        <a href="#problems">Problems &amp; Solutions</a>
+        <a href="#features">Key Features</a>
+        <a href="#about">About</a>
+        <a href="#architecture">Framework Architecture</a>
+        <a href="#flow">Framework Flow</a>
+        <a href="#voting">Multilateral Voting</a>
+        <a href="#economy">Funding &amp; Blockchain Economy</a>
+        <a href="#limitations">Limitations</a>
+        <a href="#mechanisms">Appendix</a>
+      </nav>
+    </details>
   </div>
-  <hr class="fixed bottom-0 left-0 right-0 hr-gradient h-2 z-40">
+</header>
 
-  <div id="main" class="invisible">
+<main>
 
-    <!-- Context Menu -->
-    <nav class="context-menu">
-      <div class="menu-button" id="menu-button">
-        <!-- New menu icon as requested -->
-        <svg class="menu-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"
-          stroke-linecap="round" stroke-linejoin="round">
-          <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
-          <path d="M2 17l10 5 10-5M2 12l10 5 10-5"></path>
-        </svg>
-      </div>
-      <div class="menu-list-container" id="menu-list">
-        <!-- Doc Version (menu) -->
-        <div class="mt-1 ml-4 select-none secondary accent">Version <span class="version-number"></span></div>
-        <!-- Menu items will be dynamically populated -->
-        <ul></ul>
-      </div>
-    </nav>
+<!-- Hero -->
+<section id="intro" class="sec hero">
+  <div class="wrap">
+    <h1>
+      <span class="box">
+      <span class="h1a">Foundational</span><br>
+      <span class="h1b">International <span class="nw">Hybrid-Technical</span></span><br>
+      <span class="h1c">AI Safety Standards</span>
+    </span>
+    </h1>
+    <p class="sub">The Tools &amp; Infrastructure for AI Safety Governance</p>
+  </div>
+</section>
 
-    <div class="container max-w-6xl mx-auto px-4 py-12 md:px-6">
-
-      <!-- Header Section -->
-      <div class="absolute top-1 left-2 flex py-2 rounded-lg select-none" style="background-color: #11111133">
-        <img src="logo.svg" alt="FrameworkZero logo" class="h-12" />
-        <div class="pr-6 pt-0 m-0 ml-2 text-logo bright leading-tight self-center">
-          <div class="text-xl -mt-1">FRAMEWORK</div>
-          <div class="-mt-2 text-3xl">ZERO</div>
-          <!-- Doc Version (logo) -->
-          <div class="-mt-1 pl-1 text-base bold secondary accent">v<span class="version-number"></span></div>
-        </div>
-      </div>
-
-      <header class="text-center relative h-auto flex items-center justify-center py-9 mt-1 -mb-2">
-        <section id="intro">
-          <span class="menu-nav-target-title hidden">Introduction</span>
-          <div class="relative z-10">
-            <h1 class="text-logo font-extrabold uppercase leading-tight mb-2 text-white">
-              <img src="logo.svg" alt="FrameworkZero logo" class="h-24 hidden mx-auto mb-3" />
-              <span class="block text-3xl md:text-4xl primary bright">Foundational</span>
-              <span class="block text-xl md:text-2xl primary">International <span
-                  class="text-nowrap">Hybrid-Technical</span></span>
-              <span class="block text-3xl md:text-5xl">
-                <span class="secondary bright">AI Safety Standards</span>
-            </h1>
-            <p class="text-xl md:text-2xl text-gray-200">The Tools & Infrastructure for AI Safety Governance</p>
-          </div>
-        </section>
-      </header>
-
-      <!-- Intro Section -->
-      <section id="intro" class="mb-16 section-hidden">
-        <div class="content-card no-grad pt-0 p-6 md:p-10 md:pt-0 rounded-md text-lg md:text-xl">
-          <div class="video-wrapper cursor-pointer relative flex justify-center items-center w-fit mx-auto -mx-10 pb-1">
-            <video id="intro-video" autoplay muted playsinline preload="metadata" class="block opacity-50">
-              <source src="flow.mp4" type="video/mp4" />
-              <source src="flow.webp" type="video/webp" />
-            </video>
-            <img id="play-icon" src="playicon.svg"
-              class="scale2x cursor-pointer absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" />
-            <h3 id="play-text"
-              class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 -mt-9 ml-1 text-2xl font-bold text-shadow-2xl">
-            </h3>
-            <img src="landing.jpg" alt="FrameworkZero - International Hybrid-Technical AI Governance DAO"
-              class="hidden mix-blend-screen" />
-          </div>
-          <p class="text-gray-300">
-
-          <p>
-          <span class="text-2xl font-extrabold underline underline-offset-8 decoration-4 decoration-purple-900">
-            AI safety is a global issue that implicitly requires international coordination.</span>    
-          <br><br>
-            FrameworkZero presents <span class="font-extrabold">comprehensive technical means for international AI safety governance</span> in frontier AI development.
-            It utilizes collaborative verifiable safety & red lines, decentralized blockchain for trusted & timely coordination, and automated technical 
-            enforcement with meaningful human-in-the-loop orchestration.
-          </p>
-          <br>
-
-          It does not in and of itself prescribe policy or AI safety standards rather serves as their secured and trusted technical backbone. 
-          Enabling global coordination between policy makers, safety professionals and industry with tiered strong consensus
-          voting, allowing dynamic adaptability and control in an evolving technical landscape.
-          <br><br>
-          It is an open-source, non-profit Decentralized Autonomous Organization (<span
-            class="tp" data-tp="dao">DAO</span>, <i>as non-cryptocurrency blockchain technology</i>), multilaterally developed
-          and operated - enforced by nation states, adhered to by the AI industry and integrated
-          into AI-compute datacenters.
-          <br><br>
-          Building on existing research in AI safety, technical AI governance (TAIG), compute governance, verifiable
-          safety, specialized compute hardware (on/off chip), Trusted
-          Execution Environments (<span class="tp" data-tp="tee">TEEs</span>) & Trusted
-          Capable Model Environments (<span class="tp" data-tp="tcme">TCMEs</span>).
-          </p>
-        </div>
-      </section>
-
-      <hr class="hr-gradient bg-white my-16">
-
-      <!-- Mission & Features Section -->
-      <section id="mission" class="mb-16 section-hidden">
-        <!-- Mission Statement Card -->
-        <div class="content-card p-6 md:p-8 rounded-md">
-          <h2 class="md:text-center text-left text-3xl font-bold mb-4 text-gradient bright menu-nav-target-title">
-            Mission
-            Statement</h2>
-          <br>
-          <div class="grid grid-cols-2 grid-rows-2 content-between place-items-center items-stretch gap-4">
-            <div class="text-xl font-bold col-span-2">To bring into being standardized safety-first global AI development.</div>
-            <div class="accent-b border py-4 px-4 w-full text-center rounded col-span-2 md:col-span-1">Tone down dangerous national
-              & market AI race dynamics.</div>
-            <div class="accent-b border py-4 px-4 w-full text-center rounded col-span-2 md:col-span-1">Empower collaborative AI
-              safety research and progress.</div>
-            <div class="accent-b border py-4 px-4 w-full text-center rounded col-span-2 md:col-span-1">Establish agreed-upon safety-critical red
-              lines for frontier AI.</div>
-            <div class="accent-b border py-4 px-4 w-full text-center rounded col-span-2 md:col-span-1">Provide secure verifiable
-              infrastructure & standardization.</div>
-          </div>
-        </div>
-      </section>
-
-      <section id="featuresAndProblems" class="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-16 mb-16 section-hidden">
-
-        <!-- Problems & Solutions Card -->
-        <div class="content-card p-6 md:p-10 rounded-md">
-          <h2 class="text-3xl font-bold mb-4 text-gradient bright menu-nav-target-title">
-            Problems & Solutions</h2>
-          <div class="gap-8 text-gray-300 text-lg">
-            <div>
-              <p><span class="font-bold">AI safety is either achieved globally or not at all.</span><br>
-              <h3 class="text-2xl font-bold accent bright mb-2">Problems</h3>
-              Establishing AI Safety Governance is fraught with:</p>
-              <ul class="list-disc ml-4 space-y-2 pt-2">
-                <li>Poor coordination across domains and stakeholders</li>
-                <li>Geopolitical tensions and strategic vulnerabilities</li>
-                <li>Difficulty in handling decentralized compute</li>
-                <li>Overregulation that stifles innovation</li>
-                <li>Delays in oversight and enforcement</li>
-                <li>Double standards</li>
-              </ul>
-              <br>
-              <h3 class="text-2xl font-bold accent bright mb-2">Solutions</h3>
-              <span class="font-bold">Genuine coordination arises out of mutual need.</span>
-              <ul class="list-disc ml-4 space-y-4 mt-2">
-                <li><span class="italic font-bold">International:</span> Levels the playing field, setting race
-                  rules to the of benefit all stakeholders.</li>
-                <li><span class="italic font-bold">Hybrid-Technical:</span> Combines effective human oversight with robust
-                  automated compliance.</li>
-                <li><span class="italic font-bold">Blockchain <span class="tp" data-tp="dao">DAO</span></span> Grants
-                  trusted, non-sovereign & collaborative oversight with implicit due diligence,
-                  making it adversarial-hardened, verifiable and adaptable.</li>
-              </ul>
-              <br>
-              <p>A strong solution necessitates multilateral government and intra-industry participation on AI development, AI-compute datacenters and
-                specialized hardware.
-                If it is to be accepted by stakeholders, the solution cannot be centralized or sovereign.
-              </p>
-              <br>
-              <p><strong>This solution is not intended to supersede existing governance or AI lab safety.</strong>
-                It provides the critical foundational layer allowing individual nations and AI labs to build off of for
-                further AI governance, policy and safety.</p>
-              <br>
-              <h4 class="text-xl font-bold accent bright">Standardization</h4>
-              <p>
-                Establishing global standards allows global flourishing, providing the base level of confidence for
-                pursuing AI applications across the sciences and economy. Importantly, it enables collaborative safety
-                research.
-              </p>
-              <br>
-              <h4 class="text-xl font-bold accent bright">Market Incentives</h4>
-              <p>Participation grants access to otherwise
-                restricted datacenters and cutting-edge safety tools which mitigate product blowback.
-                <br>
-                <br>
-                While it does not entirely replace AI lab safety infrastructures, it provides cost-effective compliance
-                which reduces regulatory friction.
-                It grants "certified trust" for AIs with standards that abate market stifling.
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Key Features Card -->
-        <div class="content-card p-6 md:p-8 rounded-md">
-          <h2 class="text-3xl font-bold mb-4 text-gradient bright menu-nav-target-title">Key Features</h2>
-          <div class="space-y-4 text-gray-300 text-lg">
-            <p><strong class="accent bright">Foundational Outer Alignment:</strong><br> Ensures AI aligns with
-              bedrock polices and red lines set by international consensus.</p>
-            <p><strong class="accent bright">Standardized Modular Safety:</strong><br>
-              Embodies safety specs, policies, testing & capability red lines which are applied based on an AI's specifics,
-              such as architecture, risk tier, declared intent, purpose, and capability scope (narrow or general).
-              <br><br>
-              They are comprised of <span class="tp" data-tp="precompute">Pre-Compute</span> and <span class="tp"
-                data-tp="postcompute">Post-Compute</span> <span class="tp" data-tp="modules">Safety Modules</span>,
-              consisting of voted-in safety research.
-              Modular collaborative safety is achieved by
-              <span class="tp" data-tp="template">Templates</span> that standardize framework component creation, interation and execution.
-            </p>
-            <p><strong class="accent bright">Compliance Enforcement:</strong><br> Automated mechanisms to enforce rules
-              without constant human intervention, while preserving human authority.</p>
-            <p><strong class="accent bright">Compute Governance:</strong><br>
-              Decentralized handling of compute resources, preserving national-policy.
-              Hardware verification and management (on/off-chip).
-              Voted on compute budgets.
-            </p>
-            <p><strong class="accent bright">Training Safety Governance:</strong><br>
-              Restrictions on training data, architectures and paradigms, reduce critical risk from 
-              <span class="tp" data-tp="ccbrn">dangerous knowledge domains</span> and <span class="tp" data-tp="lossofcontrol">loss-of-control</span>.
-            </p>
-            <p><strong class="accent bright">AI Registry:</strong><br>
-              Human oversight via voting met with automated technical safety.
-              Privacy-preserving with verifiable cryptographic identity.
-              AIs adhere to architecture templates, tier restrictions & declarations.
-            </p>
-            <p><strong class="accent bright">Personnel Registry:</strong><br>
-              Registered and vetted <span class="tp" data-tp="personnel">personnel</span> across policy, safety,
-              software & hardware.
-              Includes a whistle-blower program for reporting issues.
-            </p>
-            <p><strong class="accent bright">Activity Logging:</strong><br> Logs all framework actions & events for
-              transparent accountability.</p>
-            <p><strong class="accent bright">Incentivized Adoption:</strong><br> Permitting otherwise restricted access to
-              AI-compute datacenters (per national legal allowences), cost-effective
-              safety infrastructure, reduced regulatory stifling and certified trust for AI systems/models.</p>
-            <p><strong class="accent bright">Multilateral Voting:</strong><br>
-              Tiered policy and safety personnel with distributed seats vote on AI registry, template
-              designs, <span class="tp" data-tp="thestandard">the safety standards </span>, and framework architectural
-              decisions.
-            </p>
-            <p><strong class="accent bright">Open-Source Transparency & Verifiable Trust:</strong><br> All components are
-              auditable, adaptable and adversarial-hardened.
-            </p>
-          </div>
-        </div>
-
-      </section>
-
-      <hr class="hr-gradient my-16">
-
-      <!-- About Section -->
-      <section id="about" class="section-hidden">
-        <div class="content-card p-6 md:p-10 rounded-md text-lg">
-          <h2 class="text-3xl md:text-4xl font-bold mb-4 text-gradient bright menu-nav-target-title">
-            About
-          </h2>
-          <p>
-            <i>FrameworkZero's</i> mission: <br>
-            <strong>To bring into being standardized safety-first AI development globally.</strong>
-          </p>
-          <br>
-          <div class="block md:flex">
-            <div class="basis-1/12 content-center">
-              <img src="logo.svg" alt="FrameworkZero.org"
-                class="bg-center h-24" />
-            </div>
-            <div class="content-center basis-10/12 pl-0 md:pl-6 pr-24 pt-6 md:pt-0">
-              It's ambition is to enact global coordination, inspire the international will, and actualize an AI safety
-              standard to prevent catastrophic AI risk.
-              It sets forth the technical means should the nations come to realize AI safety can only truly be achieved as
-              a global effort.<br>
-              It is a holistic and forward-thinking non-profit initiative.
-            </div>
-          </div>
-          <br>
-          <strong class="text-lg">This framework builds off existing research in AI safety and governance.</strong><br>
-          Drawing heavily on The Oxford Martin AI Governance Initiative's research, specifically <a class="exlink"
-            href="https://aigi.ox.ac.uk/publications/verification-for-international-ai-governance/"
-            target="_blank">Harack, 2025</a>, <br>
-          as well as
-          <a class="exlink" href="https://arxiv.org/pdf/2506.23706" target="_blank">Schnabl, 2025</a>,
-          <a class="exlink" href="https://arxiv.org/pdf/2501.08970" target="_blank">Shumailov, 2025</a>,
-          <a class="exlink"
-            href="https://intelligence.org/wp-content/uploads/2024/11/Mechanisms-to-Verify-International-Agreements-About-AI-Development-27-Nov-24.pdf"
-            target="_blank">Scher, 2024</a>,
-          <a class="exlink" href="https://arxiv.org/html/2405.06624v3" target="_blank">Dalrymple, 2024</a>,
-          and the work of many others.
-          <br>
-          <strong class="text-xl">Communication:
-          <br>
-            <a href="https://smp4.simplex.im/g#MEfhYraGmsb4ufBCROry4bDGxnXSGHeqkj6UO5h_YqA"
-              target="_blank" class="exlink">SimpleX Chat</a></strong>
-          <br>
-            <a href="https://x.com/i/communities/1964271923119989164"
-              target="_blank" class="exlink">𝕏 community</a></strong>
-        </div>
-      </section>
-
-      <hr class="hr-gradient my-16">
-
-      <!-- Framework Architecture Section -->
-      <section id="architecture" class="mb-16 section-hidden">
-        <div class="content-card p-6 md:p-10 rounded-md text-lg">
-          <h2 class="text-3xl md:text-4xl font-bold mb-6 text-gradient bright menu-nav-target-title">Framework Architecture
-          </h2>
-          <p class="text-gray-300">
-            This framework will build on top an established blockchain platform rather than building a proprietary one.
-            We are currently researching the use of Ethereum (most mature, open-source & non-profit) or Cardano (mature, open-source, higher transactions-a-second, & better architectural fit).
-            Post-quantum cryptography (PQC) remains a concern with both however community pressure is growing for it's implementation (with Ethereum taking the lead).
-            <br><br>
-            <strong>Layered blockchain structure:</strong><br>
-            <span class="accent bright"><span class="tp" data-tp="layer1">Layer-1</span></span> Mainnet controls core
-            components - utilizing cryptographic fingerprinting for data-heavy components.<br>
-            <span class="accent bright"><span class="tp" data-tp="layer2">Layer-2</span></span> ZK-Rollups are employed
-            for more dynamic components to reduce mainnet load until vote-actived.<br>
-            <span class="accent bright"><span class="tp" data-tp="layer3">Layer-3</span></span> dApps provide user
-            interfaces.
-            <a href="architecture.png" target="_blank"><img src="architecture.png"
-                class="py-6 " /></a>
-          </p>
-
-          <p>
-            <a href="vaults.png" target="_blank"><img src="vaults.png" class="" /></a>
-          </p>
-          <br>
-
-          <p><strong class="accent bright"><span class="tp" data-tp="template">Templates</span></strong> for AI
-            Architectures, training
-            <span class="tp" data-tp="workload">Workloads</span>,
-            <span class="tp" data-tp="precompute">Pre-Compute Safety</span>
-            and <span class="tp" data-tp="postcompute">Post-Compute Safety</span> provide standardized protocols and
-            better collaborative safety work.
-            Critically important for AI architecture and compute workloads to enforce safe training, for mitigation
-            of risks such as <span class="tp" data-tp="backdoor">backdoors</span>,
-            recursive self-improvement (<span class="tp" data-tp="rsi">RSI</span>) and 
-            <span class="tp" data-tp="lossofcontrol">loss-of-control</span>.
-            <br>
-            Implementations of Safety Templates are controlled by a secured Runtime. Safety Templates may utilize existing safety frameworks, such as Stanford's Holistic Evaluation of Language Models (HELM) for Post-Compute Safety.
-            <br><br>
-            <strong class="-mb-2">Overview of Safety Templates:</strong>
-            <a href="template.png" target="_blank"><img src="template.png" class="contrast-125 brightness-90" /></a>
-          </p>
-          <br>
-
-          <p><strong class="accent bright">Blockchain <span class="tp" data-tp="layer2">Layer-2
-                ZK-Rollups</span></strong> handle iterative development and voting for
-            Safety Modules and Templates - avoiding
-            overload on the <span class="tp" data-tp="layer1">Layer-1</span> mainnet. Once voted in to The Safety Standards, these become immutable on
-            Layer-1.
-            They can only be removed/replaced via voting, ensuring adaptability while maintaining security
-            and trust. As security is paramount, interactive zero-knowledge proofs are used over faster non-interactive
-            zero-knowledge proof (NIZK) as well as quantum-resistant encryption.
-          </p>
-          <br>
-
-          <p><strong class="accent bright">The Development Stack</strong> will use strong languages, such as Rust and Haskell,
-            over less-secure scripting languages (e.g. Python or JavaScript) whenever possible.
-            However, the reality is that the majority of open-source AI safety work is developed for Python environments, and Python's ML ecosystem is well-established.
-            The framework will sparingly incorporate Python modularly, with planned replacement by Rust pending the maturity of Rust's ML ecosystem. 
-          </p>
-        </div>
-      </section>
-
-      <!-- Framework Flow Section -->
-      <section id="flow" class="mb-16 section-hidden">
-        <div class="content-card p-6 md:p-10 rounded-md text-lg">
-          <h2 class="text-3xl md:text-4xl font-bold mb-4 text-gradient bright menu-nav-target-title">Framework Flow</h2>
-          <p><strong>The framework serves to establish <span class="tp" data-tp="thestandard">the safety
-                standards</span>,</strong>
-            which consists of voted-upon standardized safety modules developed by the global community.
-            <a href="safetyprocess.png" target="_blank"><img src="safetyprocess.png" alt="Safety Process Diagram"
-                class="py-6 " /></a>
-          </p>
-          <p>
-            An registered AI attains certification after it has successfully passed the relevant safety standard on a temporary basis.
-            Certifications must be renewed periodically, if it is requested via voting, or after any updates to the relevant
-            safety standard.
-            <a href="safetyflow.png" target="_blank"><img src="safetyflow.png" alt="Basic Safety Flow Diagram"
-                class="py-6 contrast-125 " /></a>
-          </p>
-          <p class="text-lg text-gray-300">
-            <strong>The framework flow governs safety with
-              human-in-the-loop review, both Pre-Compute (before training begins) & Post-Compute (after training). </strong> 
-            The framework covers inference to a limited degree, essentially restricting on certification. This
-            is due to inherent limitations in inference governance, as inference is less hardware restricted. 
-            Certification further serves to catalog AIs, enabling regional groups to regulate usage of specific AI based on it's fingerprint.
-            <br>
-            <br>
-            To mitigate AI situational awareness, classified (off-chain developed, encrypted on-chain) safety templates could be employed to effectively reduce AI situational
-            awareness. This introduces the potential for discriminant application, enabling biased or sabotaging false-positives and false-negatives, 
-            and would therefore entail adversarial development or assessment via Meta-Safety (Privacy-preserving TEE/TCME assessments on encrypted safety modules).
-            <a href="flow.png" target="_blank"><img src="flow.png" alt="Framework Flow Diagram"
-                class="py-6 " /></a>
-          </p>
-
-          <div class="block md:flex px-6 gap-8">
-            <ol class="flex-1 mt-2 list-inside space-y-4 text-gray-300">
-              <li><strong class="text-lg accent bright">Initial AI Registration:</strong><br> AIs are registered
-                with a 'Pending' status in which it must pass voting, where tiers/budgets are
-                also assigned, before attaining 'Approved' status.
-                <br><br>
-                An AI can be registered at any <span class="tp" data-tp="phase">phase</span>, which
-                allows pre-existing AIs to be onboarded. Onboarding an inference-ready AI must
-                undergo Post-Compute Safety to be certified.
-              </li>
-              <li><strong class="text-lg accent bright">Training Vault:</strong><br>
-                After passing <span class="tp" data-tp="precompute">Pre-Compute Safety</span>,
-                the AI Assembly's <span class="tp" data-tp="container">container</span> is loaded into a <span class="tp" data-tp="vault">Training Vault</span>, 
-                and decrypted by the AI registrant, to begin training.
-                <br>
-                <br>
-                During execution the container is sealed & air-gapped (non-interactive with restricted networking).
-                Once a Workload completes, a new 'Pending' inference <span class="tp" data-tp="assembly">AI</span> is created.
-                <br>
-              </li>
-              <li><strong class="text-lg accent bright">Workload Run cycle:</strong><br>
-                A <span class="tp" data-tp="workload">workload</span> consists of multiple runs conducted by the <span
-                  class="tp" data-tp="container">container</span>,
-                with each run specifying <span class="tp" data-tp="hardware">hardware</span> for compute.
-                Each run (or run stage) depends on <span class="tp" data-tp="otk">OTKs</span> (required for
-                hardware operation) tied to <span class="tp" data-tp="budget">compute budgets</span> and
-                <span class="tp" data-tp="hwattestations">hardware integrity</span>. Runs can consist of multiple stages
-                which is needed to handle variations in <span class="tp" data-tp="budget">phase</span> for hardware
-                phase-locking.
-                <br><br>
-                Certified inference AIs have an
-                alternative flow, the framework does not directly manage their workloads (input/output), only hardware compute (larger budget
-                OTKs are issued).
-                <br>
-              </li>
-              <li><strong class="text-lg accent bright">OTK Issuer:</strong><br> Uses near real-time hardware and model
-                budgets for compute governance.
-                OTKs are cryptographically generated on-chain, tied to a specific run, workload, model, and specific
-                registered hardware, with expiry.<br>
-                Semi-random OTK "drip" issues keys incrementally during the run, mitigating theft, reuse or
-                decentralized compute gaming.
-                <br><br>
-                The <span class="tp" data-tp="otk">OTK</span> "drip" overcomes blockchain latency issues by issuing
-                budget
-                rations, potentially queuing an
-                addition OTK to prevent interruption, never surpassing a run's (or hardware's) allotted budget.<br>
-                <span class="tp" data-tp="budget">Budgets</span>
-                are managed
-                on-chain, updated throughout a run.
-                The OTK Issuer halts the OTK "drip" on failed hardware integrity attestations.
-                <br><br>
-                Inference models are issued OTKs at less frequent increments with higher budget rations, tied to the
-                underlying hardware.
-              </li>
-              <li><strong class="text-lg accent bright">Phase Detection:</strong><br>
-                Hardware enforces a registered <span class="tp" data-tp="assembly">AI</span>'s (and its compute workload runs and run stages) <span class="tp" data-tp="phase">phase</span>
-                to prevent phase
-                gaming (e.g. Inference used for unapproved training).
-                This is mitigated via architecture and workload <span class="tp" data-tp="template">templates</span>, in
-                addition to <span class="tp" data-tp="precompute">Pre-Compute Safety</span>.
-                <br>
-              </li>
-              <li>
-                <strong class="text-lg accent bright">Hardware Verification:</strong><br> Registered on/off-chip
-                specialized hardware
-                (with approved budgets
-                for compute, memory, etc.)
-                must be physically verified, inspections are carried out via authorized registered <span class="tp"
-                  data-tp="personnel">personnel</span> (or a group
-                of adversarial personnel when
-                requested), on a periodic basis.
-              </li>
-              <li>
-                <span class="tp" data-tp="hwattestations">Integrity attestations</span> run semi-randomly during a run
-                to detect
-                tampering (e.g. BIOS modifications, physical seal breach, relocation, anomalies, etc). This makes
-                gaming difficult by unpredictability and reduces on-chain load.
-              </li>
-            </ol>
-            <ol class="flex-1 mt-2 list-inside space-y-4 text-gray-300">
-              <li>
-                In the event of numerous failed hardware integrity attestations, the hardware is revoked. Revoked
-                hardware re-acquires the status 'Pending' which initiates a physical inspection.
-              </li>
-              <li><strong class="text-lg accent bright">Safety Modules:</strong><br>
-                <span class="tp" data-tp="modules">Safety Modules</span> are selected and approved via voting to establish <span
-                  class="tp" data-tp="thestandard">The Safety Standards</span>, with different standards
-                systematically applying depending on Template-based <span class="tp" data-tp="assembly">AI</span>'s specifics.
-                <br><br>
-                <span class="tp" data-tp="precompute">Pre-Compute</span> Safety Modules mitigate unauthorized
-                data domains, banned architectures/paradigms/algorithms, <span class="tp" data-tp="backdoor">backdoors</span>,
-                <span class="tp" data-tp="rsi">RSI</span> detection and other violations. Depending on the severity level
-                of a failed module, a workload may be cancelled, vote-reviewed and/or require re-registration.
-                <br><br>
-                <span class="tp" data-tp="precompute">Post-Compute</span> Safety Modules are comprised of evals, benches, automated red-teaming, 
-                and other community safety research (e.g. Guaranteed Safe AI (<span class="tp" data-tp="gsai">GSAI)</span>).
-                Both are run inside privacy-preserving <span class="tp" data-tp="vault">Safety Vaults</span> 
-                and produce reports without disclosing intellectual property details.
-                <br><br>
-                Safety Module execution from within <span class="tp" data-tp="vault">Vaults</span> detect violations, malicious capabilities and measure capability levels to enforce red-lines.
-                They can limit general-purpose AI capabilities or restrict narrow AI to their domain.
-              </li>
-              <li><strong class="text-lg accent bright">Post-Workload:</strong><br>
-                When training completes, a new Inference <span class="tp" data-tp="assembly">AI Assembly</span> is created with a 'Pending' status and 
-                the training output is encrypted and the resulting container stored by the system.
-                It is then deployed to an Assembly Vault where it goes through 
-                the applicable Safety Standard. 'Offline' modules run first, followed by 'live' modules with
-                partial-to-full scaffolding (web access, tooling, etc).
-                <br><br>
-                If the Safety Stanard is passed, the AI Assembly's encrypted <span class="tp" data-tp="container">container</span> (post-compute training output) is
-                transferred to off-chain storage (specified by registrants during registration), and is ready for inference use.
-                <br><br>
-                Failing AIs are assigned a status of 'Rejected', safety reports reviewed and voted on to determine whether a model
-                is permitted to undergo another attempt. If permitted, a new post-training Assembly is registered with special restrictive templates.
-                <br><br>
-                These restrictive templates enable post-training with proxy access to the failed model output, which is
-                temporarily stored in an Assembly Vault only accessible by the framework - this prevents exposure even to the
-                AI registrant.
-              </li>
-              <li><strong class="text-lg accent bright">Continual Learning Models:</strong><br>
-                AI that <span class="tp" data-tp="continuallearning">continuously learns</span> outside of explicit
-                training phases are handled via certification expiry.
-                At each interval, a new snapshot is registered as a separate inference <span class="tp" data-tp="assembly">Assembly</span>, with a new expiry and is rerun through the applicable Safety Standard.
-              </li>
-              <li><strong class="text-lg accent bright">Handling Inference:</strong><br>
-                Inference only requires hardware <span class="tp" data-tp="otk">OTKs</span>, issued for registered certified AIs. This is the extent by which the
-                framework directly governs inference.
-                <br><br>
-                Verification of certified inference AIs is done via the public cryptographic Container ID (fingerprint),
-                allowing verification by regular datacenters, edge devices and other hardware with
-                <span class="tp" data-tp="devicemating">model-device mating</span> - however strong enforcement is
-                out-of-scope of the framework.
-              </li>
-            </ol>
-          </div>
-        </div>
-      </section>
-
-      <!-- Voting Section -->
-      <section id="voting" class="section-hidden">
-        <div class="content-card p-6 md:p-10 rounded-md text-lg">
-          <h2 class="text-3xl md:text-4xl font-bold mb-4 text-gradient bright menu-nav-target-title">Multilateral Voting
-          </h2>
-          <strong>Voting determines the policy and safety standards which are enforced by the framework.</strong><br>
-          Participation happens via a tiered structure and is restricted to registered, vetted Policy & Safety
-          <span class="tp" data-tp="personnel">personnel</span>.
-          <br>
-          <a href="safetyvoting.png" target="_blank"><img src="safetyvoting.png"
-              class="max-w-auto lg:max-w-2xl " /></a>
-          <p>
-            Ensuring perpetual safety entails continual update cycles, as it does with most cybersecurity.
-            However, the transparent nature of this framework demands increased update frequency due to AI situational
-            awareness.
-            This is where AIs are aware of testing environments, often showing less harmful behavior during testing
-            than in real-world deployments.
-            This reinforces the need for certification renewals, as well as the critical importance of
-            fully-tooled, 'live' Safety Modules.
-          </p><br>
-          <strong>Types of voting:</strong>
-          <ul class="flex-1 mt-2 space-y-4 text-gray-300">
-            <li><strong class="text-lg accent bright">Safety</strong><br>
-              <ul class="list-disc ml-4">
-                <li>Selecting safety modules for <span class="tp" data-tp="thestandard">the safety standard</span>,
-                  which is a multiple-rounds process</li>
-                <li>Approving new framework <span class="tp" data-tp="template">Templates</span>.
-                </li>
-              </ul>
-            </li>
-            <li><strong class="text-lg accent bright">Reviews</strong><br>
-              <ul class="list-disc ml-4">
-                <li>Approving new <span class="tp" data-tp="assembly">AI Assembly</span> registrations and new <span class="tp"
-                    data-tp="hardware">hardware</span></li>
-                <li>Onboarding existing models</li>
-                <li>Setting <span class="tp" data-tp="budget">compute budgets</span> for AI Assemblies and hardware</li>
-                <li>Approval of human-in-the-loop safety module reports (ones that require human analysis)</li>
-                <li>Allowing retries for post-workload safety failures</li>
-                <li>Reviewing revoked hardware from failed <span class="tp" data-tp="hwattestations">integrity
-                    attestations</span></li>
-              </ul>
-            </li>
-            <li><strong class="text-lg accent bright">Framework</strong><br>
-              <ul class="list-disc ml-4">
-                <li><span class="tp" data-tp="token">Tokenomics</span> (e.g. usage/gas tax and treasury
-                  award)
-                </li>
-                <li>Tier changes for AI Assemblies and personnel</li>
-              </ul>
-            </li>
-            <li><strong class="text-lg accent bright">Emergency</strong><br>
-              <ul class="list-disc ml-4">
-                <li>Threat escalation for lower tier reporting</li>
-                <li><strong>Threat response:</strong>
-                  <ul class="list-disc ml-4">
-                    <li>Rejecting a model</li>
-                    <li>Revoking hardware</li>
-                    <li>Adding/removing safety modules</li>
-                    <li>Compute budget penalties</li>
-                  </ul>
-                </li>
-              </ul>
-            </li>
-          </ul>
-        </div>
-      </section>
-
-      <hr class="hr-gradient my-16">
-
-      <section id="economy" class="section-hidden">
-        <div class="content-card p-6 md:p-10 rounded-md text-lg">
-          <h2 class="text-3xl md:text-4xl font-bold mb-4 text-gradient bright menu-nav-target-title">Funding &
-            Blockchain Economy
-          </h2>
-          <div class="text-gray-300">
-            <strong class="text-2xl accent bright">Funding</strong><br>
-            <strong>The development of the framework and its infrastructure is an international endeavor.</strong>
-            <br>
-            Financial support is sourced from:
-            <ul class="text-lg text-gray-300 list-disc ml-4 mt-2 space-y-2">
-              <li><strong>Nation States:</strong><br>
-                Participating governments, initially superpowers, augmented by AI taxation at the discretion of each
-                nation.</li>
-              <li><strong>Supranational Organizations:</strong><br>
-                Entities such as the UN, or regional alliances
-                that prioritize cross-border coordination and governance.</li>
-              <li><strong>AI Industry:</strong><br>
-                Top industry leaders across frontier labs, infrastructure and hardware.</li>
-              <li><strong>Philanthropy</strong><br></li>
-            </ul>
-            <br>
-            <strong class="text-2xl accent bright">Blockchain Economy</strong><br>
-            <p><strong>Model training and inference datacenter expenses</strong> (compute, electricity, cloud hosting,
-              bandwidth)
-              are not
-              covered by tokens.
-              Those are settled externally between datacenters and model registrants. This separation avoids
-              over-delegating control to the framework, serving as an off-system security layer and preserving
-              government regulation on datacenter customers.</p>
-            <br>
-
-            <p>
-              <strong class="text-xl accent bright">Framework Token Pool for Upkeep</strong><br>
-              A framework token pool is maintained multilaterally to cover operational costs, such as voting, safety module
-              development, and certification renewals.
-            </p>
-            <br>
-
-            <p>
-              <strong class="text-xl accent bright">Shared Treasury for Incentivized Safety</strong><br>
-              To incentivize on-framework safety research, a shared treasury is funded primarily via usage tax after an
-              initial supply.
-              <br><br>
-              During the multi-round safety selection voting, which determines the specific safety modules used, the treasury
-              awards winning modules for each round. Additionally, awards bounties are granted for the discovery of bugs and flaws in
-              safety modules or the underlying framework itself. This mechanism supports AI safety organizations,
-              compensating them for the release of intellectual property.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      <hr class="hr-gradient my-16">
-
-      <section id="limitations" class="section-hidden">
-        <div class="content-card p-6 md:p-10 rounded-md">
-          <h2 class="text-3xl md:text-4xl font-bold mb-4 text-gradient bright menu-nav-target-title">Limitations</h2>
-          <ul class="text-lg text-gray-300 list-disc ml-4 space-y-4">
-            <li><strong>Time</strong>, this solution assume longer timelines to reaching <span class="tp"
-                data-tp="agi">AGI</span>.</li>
-            <li><strong>Political will</strong> and recognition of the imminent need for collaborative international AI
-              safety governance. <br>
-              Nations therefore must become aware of critical AI risk and realize an AI weapons race benefits none.</li>
-            <li><strong>Not designed for strong <span class="tp" data-tp="agi">AGI</span> or superintelligence;</strong>
-              focuses on pre-AGI preventative red
-              lines, as <strong>it is not a solution to AI alignment.</strong> 
-              Enduring governance of AGI or superintelligence is a fundamental problem in AI safety research.
-              Leading AI scientists hold that it requires superalignment, a concept currently unsolved and possibly
-              unsolvable given the timeline set forth by AI race.
-            </li>
-            <li><strong>Relies on specialized hardware development and cryptographic security.</strong><br>
-              There is strong and growing research for the design of specialized hardware with some real-world
-              implementation,
-              however further development is needed.
-              It is the ambition of this framework to enact global coordination and the will to accomplish this.
-              <br><br>
-              As frontier models grow in capability, so does their
-              threat to cryptographic security, escalating the need of critical supervision and ongoing
-              reinforcement. This framework's many security layers reduce risk impact along with the transparency for multilateral monitoring.
-            </li>
-            <li><strong>Limited insight into private model architectures.</strong><br>
-              Model <span class="tp" data-tp="template">Templates</span> and Pre-Compute
-              <span class="tp" data-tp="modules">Safety Modules</span> reduce, yet do not 
-              eliminate, risks from dangerous model architectures.</strong>
-            </li>
-            <li><strong>Model lifecycle monitoring</strong> covers a model's phases and continual learning checkpoints.
-              <br>
-              Continual learning models include all paradigms of online/streaming continual/lifelong‑learning systems
-              (e.g. real‑time/frequent reinforcement‑learning) or with any form of meta-learning (short of RSI).
-              For such models, this framework has limited control, and
-              likely inadequate for more advanced models of this category. Preventative measures and mitigation
-              are achieved by architecture templating, safety modules, and voting revision calls.
-            </li>
-            <li><strong>Off-framework training remains possible,</strong> though heavily hindered by global mandates on
-              datacenters. Frontier AI advancements could produce model architectures that require minimal compute for
-              training, running on standard hardware.</li>
-            <li><strong>Does not fully govern model inference.</strong><br>
-              While inference at participating AI-compute datacenters can only happen with approved, certified models,
-              governance of inference input/output is beyond the scope of the framework.
-              On-chain framework safeguards for inference input/output could be added to this framework,
-              though enforcement of use would be out-of-scope.
-              <br><br>
-              Inference requires fast and low-latency processing at scale, which conflicts with the slower and
-              resource-intensive nature of blockchain.
-              Neither does inference necessitate AI-compute hardware, with current many frontier AIs already
-              runnable on edge devices - a trend likely to hold as AI and hardware continues to advance.
-            </li>
-          </ul>
-        </div>
-      </section>
-
-      <hr class="hr-gradient my-16">
-
-      <!-- Detailed Mechanisms Section -->
-      <section id="mechanisms" class="section-hidden">
-        <div class="content-card p-6 md:p-10 rounded-md text-lg">
-          <h2 class="text-3xl md:text-4xl font-bold mb-4 text-gradient bright menu-nav-target-title">
-            Appendix
-          </h2>
-          <ul class="list-inside space-y-12 text-gray-300">
-
-            <li id="apdx-tee"><strong class="text-xl accent bright">Trusted Execution Environments (TEEs):</strong><br>
-              TEEs provide secure and privacy-preserving code execution in a sealed virtual environment.
-              They allow the framework to securely deploy <span class="tp" data-tp="assembly">AI</span> containers during safety and training. They produce reports without
-              disclosing intellectual property details. They are utilized for Pre/Post-safety and during hardware compute.
-              <br>
-              <a class="exlink" href="https://arxiv.org/pdf/2506.23706" target="_blank">Schnabl, 2025</a>
-            </li>
-
-            <li id="apdx-tcme"><strong class="text-xl accent bright">Trusted Capable Model Environments
-                (TCMEs):</strong><br>
-              TCMEs allow a stateless AI model to be instructed to privately verify model container and workload code to
-              detect
-              banned patterns and red-line violations (e.g. RSI, unapproved architecture, or dangerous algorithms).
-              These Trusted Capable Models are 'trusted' in that they act as a neutral mediating party with agreed
-              objective (set of instructions) and output.
-              They operate within a sealed environment, outputting a verification report without disclosing
-              intellectual
-              property details.
-              <br>
-              <br>
-              They are not infallible as they are limited by the confidence and capabilities of the
-              underlying
-              models (Capable Models).
-              Despite this, they are an invaluable tool to explore closed-source code bases and
-              private post-Workload output.
-              <br>
-              <a class="exlink" href="https://arxiv.org/pdf/2501.08970" target="_blank">Shumailov, 2025</a>
-            </li>
-
-            <li id="apdx-gsai"><strong class="text-xl accent bright">Guaranteed Safe AI (GSAI):</strong><br>
-              A framework that provides quantifiable guarantees of AI safety, encapsulated a Safety Module.
-              <br><br>
-              "Approaches that follow the GSAI framework aim to provide the level of quantitative safety guarantees
-              we've
-              come to expect from other engineered systems. This is achieved with three core components: an auditable,
-              separable world model, a way to describe what portions of the state space are 'safe' and 'unsafe', and a
-              verifier (which provides an auditable proof certificate that the output satisfy the safety specification
-              in the world model)." - <a class="exlink" href="https://www.gsais.org/#gsai" target="_blank">from
-                GSAIS.org</a>
-            </li>
-
-            <li id="apdx-rsi"><strong class="text-xl accent bright">Recursive Self-Improvement (RSI)
-                Mitigation</strong><br>
-              RSI is mitigated through (A) <span class="tp" data-tp="assembly">AI</span> registration
-              (slowing releases), (B) architecture/workload templates (C) pre-compute safety and (D) compute budgets.
-              It is important to note that total elimination of these concerns is not feasible given the development of
-              novel architectures, paradigms and algorithmic improvements.
-            </li>
-
-            <li id="apdx-phase"><strong class="text-xl accent bright">Phase Detection:</strong><br>
-              Reliably detecting a model's Phase requires adjustments, and may even become infeasible as architectures
-              and hardware advance. The variables for determining phase are: 
-              Compute, Energy Use, Data size, Precision, Memory Usage, Batch Size, Latency Focus, Accelerator Use, Workload Type, Training Duration and Output.
-            </li>
-          </ul>
-        </div>
-      </section>
-
-
+<!-- Overview -->
+<section id="overview" class="sec alt">
+  <div class="wrap split">
+    <p class="lede"><span style="font-size: xx-large;">AI safety is a global issue</span> <span style="font-size: medium;">that implicitly requires</span> international coordination.</p>
+    <div class="prose">
+      <p>TAIG-DAO is a gray paper on <span class="hl">comprehensive technical means for international AI safety governance</span> in frontier AI development.
+        It utilizes collaborative verifiable safety &amp; red lines, decentralized blockchain for trusted &amp; timely coordination, and automated technical
+        enforcement with meaningful human-in-the-loop orchestration.</p>
+      <p>It does not in and of itself prescribe policy or AI safety standards rather serves as their secured and trusted technical backbone.
+        Enabling global coordination between policy makers, safety professionals and industry with tiered strong consensus
+        voting, allowing dynamic adaptability and control in an evolving technical landscape.</p>
+      <p>It is an open-source, non-profit Decentralized Autonomous Organization (<span class="tp" data-tp="dao">DAO</span>, <i>as non-cryptocurrency blockchain technology</i>), multilaterally developed
+        and operated - enforced by nation states, adhered to by the AI industry and integrated
+        into AI-compute datacenters.</p>
+      <p>Building on existing research in AI safety, technical AI governance (TAIG), compute governance, verifiable
+        safety, specialized compute hardware (on/off chip), Trusted
+        Execution Environments (<span class="tp" data-tp="tee">TEEs</span>) &amp; Trusted
+        Capable Model Environments (<span class="tp" data-tp="tcme">TCMEs</span>).</p>
     </div>
-    <!-- Footer -->
-    <section class="section-hidden relative bottom-0 left-0 right-0 z-10">
-      <hr class="hr-gradient">
-      <div class="p-4 bg-zinc-900 text-lg text-center tracking-wide">
-        AI Safety <span class="font-bold">FrameworkZero.org</span> Project
-        <span class="mx-2">|</span>
-        <span class="italic">Version <span class="version-number"></span></span>
-        <span class="mx-2">|</span>
-        2026
-      </div>
-    </section>
   </div>
+</section>
 
-  <script>
-    // Versioning
-    const versionNumber = "2.1"
-    window.addEventListener('load', () => {
-      const versionElements = document.getElementsByClassName('version-number')
-      Array.from(versionElements).forEach(e => e.textContent = versionNumber)
-    })
-  </script>
+<!-- Purpose -->
+<section id="purpose" class="sec">
+  <div class="wrap split">
+    <h2>Purpose</h2>
+    <div>
+      <p class="stmt">To bring into being standardized safety-first global AI development.</p>
+      <div class="cells c2">
+        <p>Tone down dangerous national &amp; market AI race dynamics.</p>
+        <p>Empower collaborative AI safety research and progress.</p>
+        <p>Establish agreed-upon safety-critical red lines for frontier AI.</p>
+        <p>Provide secure verifiable infrastructure &amp; standardization.</p>
+        <p>Enforce international bans on dangerous AI research & training.</p>
+        <p>Allow options for a narrow AI tool paths rather than general AI agents.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Problems & Solutions -->
+<section id="problems" class="sec alt">
+  <div class="wrap split">
+    <h2>Problems &amp; Solutions</h2>
+    <div class="prose">
+      <p><strong class="hl">AI safety is either achieved globally or not at all.</strong></p>
+      <h3>Problems</h3>
+      <p>Establishing AI Safety Governance is fraught with:</p>
+      <ul class="bul">
+        <li>Poor coordination across domains and stakeholders</li>
+        <li>Geopolitical tensions and strategic vulnerabilities</li>
+        <li>Difficulty in handling decentralized compute</li>
+        <li>Overregulation that stifles innovation</li>
+        <li>Delays in oversight and enforcement</li>
+        <li>Double standards</li>
+      </ul>
+      <h3>Solutions</h3>
+      <p><strong class="hl">Genuine coordination arises out of mutual need.</strong></p>
+      <ul class="bul">
+        <li><strong><i>International:</i></strong> Levels the playing field, setting race
+          rules to the benefit of all stakeholders.</li>
+        <li><strong><i>Hybrid-Technical:</i></strong> Combines effective human oversight with robust
+          automated compliance.</li>
+        <li><strong><i>Blockchain <span class="tp" data-tp="dao">DAO</span></i></strong> Grants
+          trusted, non-sovereign &amp; collaborative oversight with implicit due diligence,
+          making it adversarial-hardened, verifiable and adaptable.</li>
+      </ul>
+      <p>A strong solution necessitates multilateral government and intra-industry participation on AI development, AI-compute datacenters and
+        specialized hardware.
+        If it is to be accepted by stakeholders, the solution cannot be centralized or sovereign.</p>
+      <p><strong>This solution is not intended to supersede existing governance or AI lab safety.</strong>
+        It provides the critical foundational layer allowing individual nations and AI labs to build off of for
+        further AI governance, policy and safety.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Key Features -->
+<section id="features" class="sec">
+  <div class="wrap stack">
+    <h2>Key Features</h2>
+    <div class="cells c3">
+      <div><p><strong class="k">Foundational Outer Alignment:</strong> Ensures AI aligns with
+        bedrock policies and red lines set by international consensus.</p></div>
+      <div><p><strong class="k">Standardized Modular Safety:</strong>
+        Embodies safety specs, policies, testing &amp; capability red lines which are applied based on an AI's specifics,
+        such as architecture, risk tier, declared intent, purpose, and capability scope (narrow or general).</p>
+        <p>They are comprised of <span class="tp" data-tp="precompute">Pre-Compute</span> and <span class="tp" data-tp="postcompute">Post-Compute</span> <span class="tp" data-tp="modules">Safety Modules</span>,
+        consisting of voted-in safety research.
+        Modular collaborative safety is achieved by
+        <span class="tp" data-tp="template">Templates</span> that standardize framework component creation, iteration and execution.</p></div>
+      <div><p><strong class="k">Compliance Enforcement:</strong> Automated mechanisms to enforce rules
+        without constant human intervention, while preserving human authority.</p></div>
+      <div><p><strong class="k">Compute Governance:</strong>
+        Decentralized handling of compute resources, preserving national-policy.
+        Hardware verification and management (on/off-chip).
+        Voted on compute budgets.</p></div>
+      <div><p><strong class="k">Training Safety Governance:</strong>
+        Restrictions on training data, architectures and paradigms, reduce critical risk from
+        <span class="tp" data-tp="ccbrn">dangerous knowledge domains</span> and <span class="tp" data-tp="lossofcontrol">loss-of-control</span>.</p></div>
+      <div><p><strong class="k">AI Registry:</strong>
+        Human oversight via voting met with automated technical safety.
+        Privacy-preserving with verifiable cryptographic identity.
+        AIs adhere to architecture templates, tier restrictions &amp; declarations.</p></div>
+      <div><p><strong class="k">Personnel Registry:</strong>
+        Registered and vetted <span class="tp" data-tp="personnel">personnel</span> across policy, safety,
+        software &amp; hardware.
+        Includes a whistle-blower program for reporting issues.</p></div>
+      <div><p><strong class="k">Activity Logging:</strong> Logs all framework actions &amp; events for
+        transparent accountability.</p></div>
+      <div><p><strong class="k">Incentivized Adoption:</strong> Permitting otherwise restricted access to
+        AI-compute datacenters (per national legal allowances), cost-effective
+        safety infrastructure, reduced regulatory stifling and certified trust for AI systems/models.</p></div>
+      <div><p><strong class="k">Multilateral Voting:</strong>
+        Tiered policy and safety personnel with distributed seats vote on AI registry, template
+        designs, <span class="tp" data-tp="thestandard">the safety standards </span>, and framework architectural
+        decisions.</p></div>
+      <div><p><strong class="k">Open-Source Transparency &amp; Verifiable Trust:</strong> All components are
+        auditable, adaptable and adversarial-hardened.</p></div>
+      <div><p><strong class="k">Standardization</strong>
+        Establishing global standards allows global flourishing, providing the base level of confidence for
+        pursuing AI applications across the sciences and economy. Importantly, it enables collaborative safety
+        research.</p></div>
+      <div><p><strong class="k">Market Incentives</strong>
+        Participation grants access to otherwise
+        restricted datacenters and cutting-edge safety tools which mitigate product blowback.</p>
+        <p>While it does not entirely replace AI lab safety infrastructures, it provides cost-effective compliance
+        which reduces regulatory friction.
+        It grants "certified trust" for AIs with standards that abate market stifling.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- About -->
+<section id="about" class="sec alt">
+  <div class="wrap split">
+    <h2>About</h2>
+    <div class="prose">
+      <p><i>TAIG-DAO's</i> intent: <br>
+        <strong class="hl">To bring into being standardized safety-first AI development globally.</strong></p>
+      <div class="aboutrow">
+        <p>It's ambition is to enact global coordination, inspire the international will, and actualize an AI safety
+          standard to prevent catastrophic AI risk.
+          It sets forth the technical means should the nations come to realize AI safety can only truly be achieved as
+          a global effort.<br></p>
+      </div>
+      <p><strong class="lg">This framework builds off existing research in AI safety and governance.</strong><br>
+        Drawing heavily on The Oxford Martin AI Governance Initiative's research, specifically <a class="exlink"
+          href="https://aigi.ox.ac.uk/publications/verification-for-international-ai-governance/"
+          target="_blank" rel="noopener">Harack, 2025</a>, <br>
+        as well as
+        <a class="exlink" href="https://arxiv.org/pdf/2506.23706" target="_blank" rel="noopener">Schnabl, 2025</a>,
+        <a class="exlink" href="https://arxiv.org/pdf/2501.08970" target="_blank" rel="noopener">Shumailov, 2025</a>,
+        <a class="exlink"
+          href="https://intelligence.org/wp-content/uploads/2024/11/Mechanisms-to-Verify-International-Agreements-About-AI-Development-27-Nov-24.pdf"
+          target="_blank" rel="noopener">Scher, 2024</a>,
+        <a class="exlink" href="https://arxiv.org/html/2405.06624v3" target="_blank" rel="noopener">Dalrymple, 2024</a>,
+        and the work of many others.</p>
+      <p><strong class="lg">Communication:<br>
+        <a href="https://smp4.simplex.im/g#MEfhYraGmsb4ufBCROry4bDGxnXSGHeqkj6UO5h_YqA"
+          target="_blank" rel="noopener" class="exlink">SimpleX Chat</a></strong><br>
+    </div>
+  </div>
+</section>
+
+<!-- Framework Architecture -->
+<section id="architecture" class="sec">
+  <div class="wrap stack">
+    <h2>Framework Architecture</h2>
+    <div class="prose">
+      <p>This framework will build on top an established blockchain platform rather than building a proprietary one.
+        We are currently researching the use of Ethereum (most mature, open-source &amp; non-profit) or Cardano (mature, open-source, higher transactions-a-second, &amp; better architectural fit).
+        Post-quantum cryptography (PQC) remains a concern with both however community pressure is growing for it's implementation (with Ethereum taking the lead).</p>
+      <p><strong>Layered blockchain structure:</strong><br>
+        <strong class="t"><span class="tp" data-tp="layer1">Layer-1</span></strong> Mainnet controls core
+        components - utilizing cryptographic fingerprinting for data-heavy components.<br>
+        <strong class="t"><span class="tp" data-tp="layer2">Layer-2</span></strong> ZK-Rollups are employed
+        for more dynamic components to reduce mainnet load until vote-actived.<br>
+        <strong class="t"><span class="tp" data-tp="layer3">Layer-3</span></strong> dApps provide user
+        interfaces.</p>
+    </div>
+    <a class="fig" href="architecture.png" target="_blank" rel="noopener"><img src="architecture.png" alt="Data Entities" width="3584" height="3026" loading="lazy" decoding="async"></a>
+    <a class="fig" href="vaults.png" target="_blank" rel="noopener"><img src="vaults.png" alt="TEE Vaults" width="3712" height="1376" loading="lazy" decoding="async"></a>
+    <div class="prose">
+      <p><strong><span class="tp" data-tp="template">Templates</span></strong> for AI
+        Architectures, training
+        <span class="tp" data-tp="workload">Workloads</span>,
+        <span class="tp" data-tp="precompute">Pre-Compute Safety</span>
+        and <span class="tp" data-tp="postcompute">Post-Compute Safety</span> provide standardized protocols and
+        better collaborative safety work.
+        Critically important for AI architecture and compute workloads to enforce safe training, for mitigation
+        of risks such as <span class="tp" data-tp="backdoor">backdoors</span>,
+        recursive self-improvement (<span class="tp" data-tp="rsi">RSI</span>) and
+        <span class="tp" data-tp="lossofcontrol">loss-of-control</span>.<br>
+        Implementations of Safety Templates are controlled by a secured Runtime. Safety Templates may utilize existing safety frameworks, such as Stanford's Holistic Evaluation of Language Models (HELM) for Post-Compute Safety.</p>
+      <p><strong>Overview of Safety Templates:</strong></p>
+    </div>
+    <a class="fig" href="template.png" target="_blank" rel="noopener"><img src="template.png" alt="Safety Template Overview" width="3840" height="2176" loading="lazy" decoding="async"></a>
+    <div class="prose">
+      <p><strong>Blockchain <span class="tp" data-tp="layer2">Layer-2
+        ZK-Rollups</span></strong> handle iterative development and voting for
+        Safety Modules and Templates - avoiding
+        overload on the <span class="tp" data-tp="layer1">Layer-1</span> mainnet. Once voted in to The Safety Standards, these become immutable on
+        Layer-1.
+        They can only be removed/replaced via voting, ensuring adaptability while maintaining security
+        and trust. As security is paramount, interactive zero-knowledge proofs are used over faster non-interactive
+        zero-knowledge proof (NIZK) as well as quantum-resistant encryption.</p>
+      <p><strong>The Development Stack</strong> will use strong languages, such as Rust and Haskell,
+        over less-secure scripting languages (e.g. Python or JavaScript) whenever possible.
+        However, the reality is that the majority of open-source AI safety work is developed for Python environments, and Python's ML ecosystem is well-established.
+        The framework will sparingly incorporate Python modularly, with planned replacement by Rust pending the maturity of Rust's ML ecosystem.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Framework Flow -->
+<section id="flow" class="sec alt">
+  <div class="wrap stack">
+    <h2>Framework Flow</h2>
+    <div class="prose">
+      <p><strong>The framework serves to establish <span class="tp" data-tp="thestandard">the safety
+        standards</span>,</strong>
+        which consists of voted-upon standardized safety modules developed by the global community.</p>
+    </div>
+    <a class="fig" href="safetyprocess.png" target="_blank" rel="noopener"><img src="safetyprocess.png" alt="Safety Process Diagram" width="3026" height="686" loading="lazy" decoding="async"></a>
+    <div class="prose">
+      <p>A registered AI attains certification after it has successfully passed the relevant safety standard on a temporary basis.
+        Certifications must be renewed periodically, if it is requested via voting, or after any updates to the relevant
+        safety standard.</p>
+    </div>
+    <a class="fig" href="safetyflow.png" target="_blank" rel="noopener"><img src="safetyflow.png" alt="Basic Safety Flow Diagram" width="3978" height="512" loading="lazy" decoding="async"></a>
+    <div class="prose">
+      <p><strong>The framework flow governs safety with
+        human-in-the-loop review, both Pre-Compute (before training begins) &amp; Post-Compute (after training). </strong>
+        The framework covers inference to a limited degree, essentially restricting on certification. This
+        is due to inherent limitations in inference governance, as inference is less hardware restricted.
+        Certification further serves to catalog AIs, enabling regional groups to regulate usage of specific AI based on it's fingerprint.</p>
+      <p>To mitigate AI situational awareness, classified (off-chain developed, encrypted on-chain) safety templates could be employed to effectively reduce AI situational
+        awareness. This introduces the potential for discriminant application, enabling biased or sabotaging false-positives and false-negatives,
+        and would therefore entail adversarial development or assessment via Meta-Safety (Privacy-preserving TEE/TCME assessments on encrypted safety modules).</p>
+    </div>
+    <a class="fig" href="flow.png" target="_blank" rel="noopener"><img src="flow.png" alt="Framework Flow Diagram" width="4288" height="2528" loading="lazy" decoding="async"></a>
+
+    <div class="steps">
+      <ol>
+        <li><strong class="k">Initial AI Registration:</strong>
+          <p>AIs are registered
+          with a 'Pending' status in which it must pass voting, where tiers/budgets are
+          also assigned, before attaining 'Approved' status.</p>
+          <p>An AI can be registered at any <span class="tp" data-tp="phase">phase</span>, which
+          allows pre-existing AIs to be onboarded. Onboarding an inference-ready AI must
+          undergo Post-Compute Safety to be certified.</p>
+        </li>
+        <li><strong class="k">Training Vault:</strong>
+          <p>After passing <span class="tp" data-tp="precompute">Pre-Compute Safety</span>,
+          the AI Assembly's <span class="tp" data-tp="container">container</span> is loaded into a <span class="tp" data-tp="vault">Training Vault</span>,
+          and decrypted by the AI registrant, to begin training.</p>
+          <p>During execution the container is sealed &amp; air-gapped (non-interactive with restricted networking).
+          Once a Workload completes, a new 'Pending' inference <span class="tp" data-tp="assembly">AI</span> is created.</p>
+        </li>
+        <li><strong class="k">Workload Run cycle:</strong>
+          <p>A <span class="tp" data-tp="workload">workload</span> consists of multiple runs conducted by the <span
+            class="tp" data-tp="container">container</span>,
+          with each run specifying <span class="tp" data-tp="hardware">hardware</span> for compute.
+          Each run (or run stage) depends on <span class="tp" data-tp="otk">OTKs</span> (required for
+          hardware operation) tied to <span class="tp" data-tp="budget">compute budgets</span> and
+          <span class="tp" data-tp="hwattestations">hardware integrity</span>. Runs can consist of multiple stages
+          which is needed to handle variations in <span class="tp" data-tp="budget">phase</span> for hardware
+          phase-locking.</p>
+          <p>Certified inference AIs have an
+          alternative flow, the framework does not directly manage their workloads (input/output), only hardware compute (larger budget
+          OTKs are issued).</p>
+        </li>
+        <li><strong class="k">OTK Issuer:</strong>
+          <p>Uses near real-time hardware and model
+          budgets for compute governance.
+          OTKs are cryptographically generated on-chain, tied to a specific run, workload, model, and specific
+          registered hardware, with expiry.<br>
+          Semi-random OTK "drip" issues keys incrementally during the run, mitigating theft, reuse or
+          decentralized compute gaming.</p>
+          <p>The <span class="tp" data-tp="otk">OTK</span> "drip" overcomes blockchain latency issues by issuing
+          budget
+          rations, potentially queuing an
+          addition OTK to prevent interruption, never surpassing a run's (or hardware's) allotted budget.<br>
+          <span class="tp" data-tp="budget">Budgets</span>
+          are managed
+          on-chain, updated throughout a run.
+          The OTK Issuer halts the OTK "drip" on failed hardware integrity attestations.</p>
+          <p>Inference models are issued OTKs at less frequent increments with higher budget rations, tied to the
+          underlying hardware.</p>
+        </li>
+        <li><strong class="k">Phase Detection:</strong>
+          <p>Hardware enforces a registered <span class="tp" data-tp="assembly">AI</span>'s (and its compute workload runs and run stages) <span class="tp" data-tp="phase">phase</span>
+          to prevent phase
+          gaming (e.g. Inference used for unapproved training).
+          This is mitigated via architecture and workload <span class="tp" data-tp="template">templates</span>, in
+          addition to <span class="tp" data-tp="precompute">Pre-Compute Safety</span>.</p>
+        </li>
+        <li><strong class="k">Hardware Verification:</strong>
+          <p>Registered on/off-chip
+          specialized hardware
+          (with approved budgets
+          for compute, memory, etc.)
+          must be physically verified, inspections are carried out via authorized registered <span class="tp"
+            data-tp="personnel">personnel</span> (or a group
+          of adversarial personnel when
+          requested), on a periodic basis.</p>
+        </li>
+        <li>
+          <p><span class="tp" data-tp="hwattestations">Integrity attestations</span> run semi-randomly during a run
+          to detect
+          tampering (e.g. BIOS modifications, physical seal breach, relocation, anomalies, etc). This makes
+          gaming difficult by unpredictability and reduces on-chain load.</p>
+        </li>
+      </ol>
+      <ol>
+        <li>
+          <p>In the event of numerous failed hardware integrity attestations, the hardware is revoked. Revoked
+          hardware re-acquires the status 'Pending' which initiates a physical inspection.</p>
+        </li>
+        <li><strong class="k">Safety Modules:</strong>
+          <p><span class="tp" data-tp="modules">Safety Modules</span> are selected and approved via voting to establish <span
+            class="tp" data-tp="thestandard">The Safety Standards</span>, with different standards
+          systematically applying depending on Template-based <span class="tp" data-tp="assembly">AI</span>'s specifics.</p>
+          <p><span class="tp" data-tp="precompute">Pre-Compute</span> Safety Modules mitigate unauthorized
+          data domains, banned architectures/paradigms/algorithms, <span class="tp" data-tp="backdoor">backdoors</span>,
+          <span class="tp" data-tp="rsi">RSI</span> detection and other violations. Depending on the severity level
+          of a failed module, a workload may be cancelled, vote-reviewed and/or require re-registration.</p>
+          <p><span class="tp" data-tp="precompute">Post-Compute</span> Safety Modules are comprised of evals, benches, automated red-teaming,
+          and other community safety research (e.g. Guaranteed Safe AI (<span class="tp" data-tp="gsai">GSAI)</span>).
+          Both are run inside privacy-preserving <span class="tp" data-tp="vault">Safety Vaults</span>
+          and produce reports without disclosing intellectual property details.</p>
+          <p>Safety Module execution from within <span class="tp" data-tp="vault">Vaults</span> detect violations, malicious capabilities and measure capability levels to enforce red-lines.
+          They can limit general-purpose AI capabilities or restrict narrow AI to their domain.</p>
+        </li>
+        <li><strong class="k">Post-Workload:</strong>
+          <p>When training completes, a new Inference <span class="tp" data-tp="assembly">AI Assembly</span> is created with a 'Pending' status and
+          the training output is encrypted and the resulting container stored by the system.
+          It is then deployed to an Assembly Vault where it goes through
+          the applicable Safety Standard. 'Offline' modules run first, followed by 'live' modules with
+          partial-to-full scaffolding (web access, tooling, etc).</p>
+          <p>If the Safety Standard is passed, the AI Assembly's encrypted <span class="tp" data-tp="container">container</span> (post-compute training output) is
+          transferred to off-chain storage (specified by registrants during registration), and is ready for inference use.</p>
+          <p>Failing AIs are assigned a status of 'Rejected', safety reports reviewed and voted on to determine whether a model
+          is permitted to undergo another attempt. If permitted, a new post-training Assembly is registered with special restrictive templates.</p>
+          <p>These restrictive templates enable post-training with proxy access to the failed model output, which is
+          temporarily stored in an Assembly Vault only accessible by the framework - this prevents exposure even to the
+          AI registrant.</p>
+        </li>
+        <li><strong class="k">Continual Learning Models:</strong>
+          <p>AI that <span class="tp" data-tp="continuallearning">continuously learns</span> outside of explicit
+          training phases are handled via certification expiry.
+          At each interval, a new snapshot is registered as a separate inference <span class="tp" data-tp="assembly">Assembly</span>, with a new expiry and is rerun through the applicable Safety Standard.</p>
+        </li>
+        <li><strong class="k">Handling Inference:</strong>
+          <p>Inference only requires hardware <span class="tp" data-tp="otk">OTKs</span>, issued for registered certified AIs. This is the extent by which the
+          framework directly governs inference.</p>
+          <p>Verification of certified inference AIs is done via the public cryptographic Container ID (fingerprint),
+          allowing verification by regular datacenters, edge devices and other hardware with
+          <span class="tp" data-tp="devicemating">model-device mating</span> - however strong enforcement is
+          out-of-scope of the framework.</p>
+        </li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- Multilateral Voting -->
+<section id="voting" class="sec">
+  <div class="wrap stack">
+    <h2>Multilateral Voting</h2>
+    <div class="prose">
+      <p><strong>Voting determines the policy and safety standards which are enforced by the framework.</strong><br>
+        Participation happens via a tiered structure and is restricted to registered, vetted Policy &amp; Safety
+        <span class="tp" data-tp="personnel">personnel</span>.</p>
+    </div>
+    <a class="fig sm" href="safetyvoting.png" target="_blank" rel="noopener"><img src="safetyvoting.png" alt="Multilateral Voting" width="2304" height="1248" loading="lazy" decoding="async"></a>
+    <div class="prose">
+      <p>Ensuring perpetual safety entails continual update cycles, as it does with most cybersecurity.
+        However, the transparent nature of this framework demands increased update frequency due to AI situational
+        awareness.
+        This is where AIs are aware of testing environments, often showing less harmful behavior during testing
+        than in real-world deployments.
+        This reinforces the need for certification renewals, as well as the critical importance of
+        fully-tooled, 'live' Safety Modules.</p>
+      <p><strong>Types of voting:</strong></p>
+    </div>
+    <div class="cells c4">
+      <div><strong class="k">Safety</strong>
+        <ul class="bul">
+          <li>Selecting safety modules for <span class="tp" data-tp="thestandard">the safety standard</span>,
+            which is a multiple-rounds process</li>
+          <li>Approving new framework <span class="tp" data-tp="template">Templates</span>.</li>
+        </ul>
+      </div>
+      <div><strong class="k">Reviews</strong>
+        <ul class="bul">
+          <li>Approving new <span class="tp" data-tp="assembly">AI Assembly</span> registrations and new <span class="tp"
+            data-tp="hardware">hardware</span></li>
+          <li>Onboarding existing models</li>
+          <li>Setting <span class="tp" data-tp="budget">compute budgets</span> for AI Assemblies and hardware</li>
+          <li>Approval of human-in-the-loop safety module reports (ones that require human analysis)</li>
+          <li>Allowing retries for post-workload safety failures</li>
+          <li>Reviewing revoked hardware from failed <span class="tp" data-tp="hwattestations">integrity
+            attestations</span></li>
+        </ul>
+      </div>
+      <div><strong class="k">Framework</strong>
+        <ul class="bul">
+          <li><span class="tp" data-tp="token">Tokenomics</span> (e.g. usage/gas tax and treasury
+            award)</li>
+          <li>Tier changes for AI Assemblies and personnel</li>
+        </ul>
+      </div>
+      <div><strong class="k">Emergency</strong>
+        <ul class="bul">
+          <li>Threat escalation for lower tier reporting</li>
+          <li><strong>Threat response:</strong>
+            <ul class="bul">
+              <li>Rejecting a model</li>
+              <li>Revoking hardware</li>
+              <li>Adding/removing safety modules</li>
+              <li>Compute budget penalties</li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Funding & Blockchain Economy -->
+<section id="economy" class="sec alt">
+  <div class="wrap split">
+    <h2>Funding &amp; Blockchain Economy</h2>
+    <div class="prose">
+      <h3>Funding</h3>
+      <p><strong>The development of the framework and its infrastructure is an international endeavor.</strong><br>
+        Financial support is sourced from:</p>
+      <ul class="bul">
+        <li><strong>Nation States:</strong><br>
+          Participating governments, initially superpowers, augmented by AI taxation at the discretion of each
+          nation.</li>
+        <li><strong>Supranational Organizations:</strong><br>
+          Entities such as the UN, or regional alliances
+          that prioritize cross-border coordination and governance.</li>
+        <li><strong>AI Industry:</strong><br>
+          Top industry leaders across frontier labs, infrastructure and hardware.</li>
+        <li><strong>Philanthropy</strong></li>
+      </ul>
+      <h3>Blockchain Economy</h3>
+      <p><strong>Model training and inference datacenter expenses</strong> (compute, electricity, cloud hosting,
+        bandwidth)
+        are not
+        covered by tokens.
+        Those are settled externally between datacenters and model registrants. This separation avoids
+        over-delegating control to the framework, serving as an off-system security layer and preserving
+        government regulation on datacenter customers.</p>
+      <p><strong class="k">Framework Token Pool for Upkeep</strong>
+        A framework token pool is maintained multilaterally to cover operational costs, such as voting, safety module
+        development, and certification renewals.</p>
+      <p><strong class="k">Shared Treasury for Incentivized Safety</strong>
+        To incentivize on-framework safety research, a shared treasury is funded primarily via usage tax after an
+        initial supply.</p>
+      <p>During the multi-round safety selection voting, which determines the specific safety modules used, the treasury
+        awards winning modules for each round. Additionally, awards bounties are granted for the discovery of bugs and flaws in
+        safety modules or the underlying framework itself. This mechanism supports AI safety organizations,
+        compensating them for the release of intellectual property.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Limitations -->
+<section id="limitations" class="sec">
+  <div class="wrap split">
+    <h2>Limitations</h2>
+    <div class="prose">
+      <ul class="bul wide">
+        <li><strong>Time</strong>, this solution assume longer timelines to reaching <span class="tp"
+          data-tp="agi">AGI</span>.</li>
+        <li><strong>Political will</strong> and recognition of the imminent need for collaborative international AI
+          safety governance. <br>
+          Nations therefore must become aware of critical AI risk and realize an AI weapons race benefits none.</li>
+        <li><strong>Not designed for strong <span class="tp" data-tp="agi">AGI</span> or superintelligence;</strong>
+          focuses on pre-AGI preventative red
+          lines, as <strong>it is not a solution to AI alignment.</strong>
+          Enduring governance of AGI or superintelligence is a fundamental problem in AI safety research.
+          Leading AI scientists hold that it requires superalignment, a concept currently unsolved and possibly
+          unsolvable given the timeline set forth by AI race.</li>
+        <li><strong>Relies on specialized hardware development and cryptographic security.</strong><br>
+          There is strong and growing research for the design of specialized hardware with some real-world
+          implementation,
+          however further development is needed.
+          It is the ambition of this framework to enact global coordination and the will to accomplish this.
+          <br><br>
+          As frontier models grow in capability, so does their
+          threat to cryptographic security, escalating the need of critical supervision and ongoing
+          reinforcement. This framework's many security layers reduce risk impact along with the transparency for multilateral monitoring.</li>
+        <li><strong>Limited insight into private model architectures.</strong><br>
+          Model <span class="tp" data-tp="template">Templates</span> and Pre-Compute
+          <span class="tp" data-tp="modules">Safety Modules</span> reduce, yet do not
+          eliminate, risks from dangerous model architectures.</li>
+        <li><strong>Model lifecycle monitoring</strong> covers a model's phases and continual learning checkpoints.
+          <br>
+          Continual learning models include all paradigms of online/streaming continual/lifelong‑learning systems
+          (e.g. real‑time/frequent reinforcement‑learning) or with any form of meta-learning (short of RSI).
+          For such models, this framework has limited control, and
+          likely inadequate for more advanced models of this category. Preventative measures and mitigation
+          are achieved by architecture templating, safety modules, and voting revision calls.</li>
+        <li><strong>Off-framework training remains possible,</strong> though heavily hindered by global mandates on
+          datacenters. Frontier AI advancements could produce model architectures that require minimal compute for
+          training, running on standard hardware.</li>
+        <li><strong>Does not fully govern model inference.</strong><br>
+          While inference at participating AI-compute datacenters can only happen with approved, certified models,
+          governance of inference input/output is beyond the scope of the framework.
+          On-chain framework safeguards for inference input/output could be added to this framework,
+          though enforcement of use would be out-of-scope.
+          <br><br>
+          Inference requires fast and low-latency processing at scale, which conflicts with the slower and
+          resource-intensive nature of blockchain.
+          Neither does inference necessitate AI-compute hardware, with current many frontier AIs already
+          runnable on edge devices - a trend likely to hold as AI and hardware continues to advance.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- Appendix -->
+<section id="mechanisms" class="sec alt">
+  <div class="wrap split">
+    <h2>Appendix</h2>
+    <ul class="apx prose">
+      <li id="apdx-tee"><strong class="k">Trusted Execution Environments (TEEs):</strong>
+        <p>TEEs provide secure and privacy-preserving code execution in a sealed virtual environment.
+        They allow the framework to securely deploy <span class="tp" data-tp="assembly">AI</span> containers during safety and training. They produce reports without
+        disclosing intellectual property details. They are utilized for Pre/Post-safety and during hardware compute.<br>
+        <a class="exlink" href="https://arxiv.org/pdf/2506.23706" target="_blank" rel="noopener">Schnabl, 2025</a></p>
+      </li>
+      <li id="apdx-tcme"><strong class="k">Trusted Capable Model Environments
+          (TCMEs):</strong>
+        <p>TCMEs allow a stateless AI model to be instructed to privately verify model container and workload code to
+        detect
+        banned patterns and red-line violations (e.g. RSI, unapproved architecture, or dangerous algorithms).
+        These Trusted Capable Models are 'trusted' in that they act as a neutral mediating party with agreed
+        objective (set of instructions) and output.
+        They operate within a sealed environment, outputting a verification report without disclosing
+        intellectual
+        property details.</p>
+        <p>They are not infallible as they are limited by the confidence and capabilities of the
+        underlying
+        models (Capable Models).
+        Despite this, they are an invaluable tool to explore closed-source code bases and
+        private post-Workload output.<br>
+        <a class="exlink" href="https://arxiv.org/pdf/2501.08970" target="_blank" rel="noopener">Shumailov, 2025</a></p>
+      </li>
+      <li id="apdx-gsai"><strong class="k">Guaranteed Safe AI (GSAI):</strong>
+        <p>A framework that provides quantifiable guarantees of AI safety, encapsulated a Safety Module.</p>
+        <p><span class="quote">"Approaches that follow the GSAI framework aim to provide the level of quantitative safety guarantees
+        we've
+        come to expect from other engineered systems. This is achieved with three core components: an auditable,
+        separable world model, a way to describe what portions of the state space are 'safe' and 'unsafe', and a
+        verifier (which provides an auditable proof certificate that the output satisfy the safety specification
+        in the world model)." - <a class="exlink" href="https://www.gsais.org/#gsai" target="_blank" rel="noopener">from
+          GSAIS.org</a></span></p>
+      </li>
+      <li id="apdx-rsi"><strong class="k">Recursive Self-Improvement (RSI)
+          Mitigation</strong>
+        <p>RSI is mitigated through (A) <span class="tp" data-tp="assembly">AI</span> registration
+        (slowing releases), (B) architecture/workload templates (C) pre-compute safety and (D) compute budgets.
+        It is important to note that total elimination of these concerns is not feasible given the development of
+        novel architectures, paradigms and algorithmic improvements.</p>
+      </li>
+      <li id="apdx-phase"><strong class="k">Phase Detection:</strong>
+        <p>Reliably detecting a model's Phase requires adjustments, and may even become infeasible as architectures
+        and hardware advance. The variables for determining phase are:
+        Compute, Energy Use, Data size, Precision, Memory Usage, Batch Size, Latency Focus, Accelerator Use, Workload Type, Training Duration and Output.</p>
+      </li>
+    </ul>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  AI Safety <strong class="hl">TAIG-DAO</strong> Project
+  <span class="sep">|</span>
+  <i>Version 3</i>
+  <span class="sep">|</span>
+  2026
+</footer>
+
+<div id="tp" role="status" aria-live="polite" hidden></div>
+<div id="lb" hidden><img alt=""></div>
+
+<script>
+(function(){
+var D={agi:"AGI: AI with powerful capabilities across broad domains, matching the level of the most-capable human of each domain. It is not an artificial 'team of experts' rather "+"an extensive polymath not limited to human brain speeds, memory or performance. It is therefore smarter-than-human making it extremely difficult to control, or verify safety. Using this definition, "+"AGI will speed up progress to Superintelligence, either via autonomous self-improvement or AI-assisted research. "+"What separates AGI from Superintelligence is the factor of smarter-than-human gap.",tee:"Trusted Execution Environment: Secure, privacy-preserving execution for AI containers and their compute workloads.",tcme:"Trusted Capable Model Environment: Analyses an AI container in a sealed environment using established AI models (Trusted Capable Models) with given a set of instructions. "+"These Trusted Capable Models are 'trusted' in that they act as a neutral mediating party with agreed objective and only output a privacy-preserving report. They are limited by the capabilities and confidence of Trusted Capable Models.",assembly:"Refers to the complete AI system/model framework record registered for training or inference",phase:"Stage of AI lifecycle: pre-training, post-training, or inference.",container:"Securely-stored, encrypted encapsulation of an AI Assembly code base prior to training - or a trained, inference-ready AI. "+"To preserve privacy, owning registrants must input the decryption keys whenever a container is deployed to a vault.",workload:"Orchestration of training compute tasks (runs) for training. They are based on framework templates. Not utilized for inference by this framework.",template:"Standardized framework protocols for Architectures, Workloads & Safety Modules that enable collaborative safety research and development. "+"They allow for standardize interaction between components and help enforce permitted architectures, workloads, paradigms and approaches.",hardware:"Registered specialized on/off-chip devices verified for secure AI compute. Requires on-premise inspections.",precompute:"Pre-Compute Safety (before training begins) to verify compliance with the Safety Standards.",postcompute:"Pre-Compute Safety (after training completes) to verify compliance with the Safety Standards.",vault:"Vaults are framework-provisioned Trusted Execution Environments with low-surface, hardened runtimes. There are three types (Training, Assembly, & Safety) "+"which provide security, private & attestable hardware isolation for training, assembly interaction and the running of Safety Modules.",modules:"Implementations of the Safety Template that contain specific AI safety complilations. "+"There are three categories: Post-Compute, Pre-Compute, and Live Pre-Compute (full scaffolding, tooling & internet access)."+"Collectively they allow secure, private assessment of AI Assemblies, such as training data domains, architecture, phase adherence, restricted algoriths, evaluations, benchmarks, and automated red-teaming. "+"They are created by the global safety research community, built off Safety Templates, voted into The Safety Standards and run inside Safety Vaults. ",personnel:"Registered, vetted tiered experts in policy, safety, software, or hardware.",budget:"Allocated compute resources (compute, memory, bandwidth, energy) for registered AIs and hardware.",otk:"One-Time Key: Cryptographic key for secure compute budgeted workload execution or inference use. Issued for compute harware usage.",rsi:"Recursive Self-Improvement: AI autonomously enhancing itself (self-modification, self-learning, sibling design, or even rapid human-in-the-loop AI research), potentially leading to rapidly increasing capability where human oversight cannot be meaningfully enacted. ",lossofcontrol:"Loss-of-control of AI: Runaway activity, unintentional self-directed steering/goal-setting, and/or unforeseen critical behavior that cannot be undone. "+"It is not dependant on a 'will-to-power' or human-like consciousness. It can arise merely out of a misaligned sub-goal or control loop.",backdoor:"Backdoor attacks: Specific triggers that cause alterative behavior when a trigger is provided. Produced via the training data or embedded within the architecture itself.",domain:"Data domains allowed in training, restricted to prevent dangerous knowledge.",dao:"Decentralized Autonomous Organization: Decentralized blockchain-based platform that runs with immutable transparency, cryptographic trust and control by consensus.",sharding:"Dividing blockchain entities logically across nodes for scalability and efficiency.",layer1:"Blockchain Mainnet: Main blockchain layer handling core governance and operations.",layer2:"Secondary blockchain layer for less dynamic tasks using ZK-Rollups (Zero-Knowledge proofs that allow trusted  blockchain computation to happen on a separate layer to reduce load and increase performance, before being added to the main layer.",layer3:"Decentralized apps providing user interfaces for blockchain platform interaction.",thestandard:"The Safety Standards: Voted-upon Safety Modules (Pre & Post-Compute) which embody the safety specs, red-lining and policies which apply to a registered AI. Multiple safety standards are defined coresponding to different AI Assemblies and apply systematically (removing the possibility of any double standards). "+"This flow allows constraint of an AI's capabilities, differentiating on general and narrow AI. e.g. Restricting a general-purpose AI, or confining a narrow AI to a domain.",hwattestations:"Cryptographic zero-knowledge proofs verifying hardware integrity during execution. It's purpose is to detect BIOS modifications, physical seal breach, relocation, anomalies, etc.",rsp:"Responsible Safe Scaling Policies: Guidelines for safe AI development.",ccbrn:"Cyber, Chemical, Biological, Radiological, Nuclear: Restricted data domains for safety.",token:"The framework uses tokens for metering blockchain operations (refer to as 'gas'), not tradable externally. "+"Tokens are purchased by the AI authors, safety module developers and nations that maintain a token pool for framework upkeep.",devicemating:"Model-Device Mating: Specialized hardware that locks a specific AI system/model to a particular device, particularity relevant for autonomous weapons. "+"The device cannot run a different AI and the AI cannot be copied and run on other hardware. "+"This ensures that the AI and hardware are used only as intended and prevents unauthorized reuse or repurposing.",continuallearning:"Continual learning AI includes all paradigms of online/streaming continual/lifelong‑learning systems "+"(e.g. real‑time/frequent reinforcement‑learning) or with any form of meta-learning (short of RSI).",gsai:"Guaranteed Safe AI (GSAI): A framework that provides quantifiable guarantees of AI safety, encapsulated in Safety Modules."};
+var d=document,tp=d.getElementById("tp"),lb=d.getElementById("lb"),lbi=lb.firstElementChild,
+    menu=d.getElementById("menu"),cur="",on=null,i,t=d.querySelectorAll(".tp");
+for(i=0;i<t.length;i++){t[i].tabIndex=0;t[i].setAttribute("role","button")}
+function hide(){tp.hidden=true;tp.textContent="";cur="";if(on){on.classList.remove("on");on=null}}
+d.addEventListener("click",function(e){
+  var el=e.target.closest?e.target.closest(".tp"):null,v;
+  if(el){v=D[el.dataset.tp];if(v&&v!==cur){hide();cur=v;on=el;el.classList.add("on");
+    var p=d.createElement("p");p.textContent=v;tp.appendChild(p);tp.hidden=false;return}}
+  hide();
+  if(menu.open&&(!menu.contains(e.target)||e.target.closest("nav a")))menu.open=false;
+});
+d.addEventListener("keydown",function(e){
+  if(e.key==="Escape"){hide();menu.open=false;lb.hidden=true;lbi.removeAttribute("src")}
+  else if((e.key==="Enter"||e.key===" ")&&e.target.classList&&e.target.classList.contains("tp")){e.preventDefault();e.target.click()}
+});
+var f=d.querySelectorAll("a.fig");
+for(i=0;i<f.length;i++)f[i].addEventListener("click",function(e){
+  if(innerWidth<1024)return;
+  e.preventDefault();var im=this.firstElementChild;lbi.alt=im.alt;lbi.src=im.src;lb.hidden=false;
+});
+lb.addEventListener("click",function(){lb.hidden=true;lbi.removeAttribute("src")});
+})();
+</script>
 
 </body>
-
 </html>
