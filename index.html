@@ -15,7 +15,7 @@
 :root{
   --bg:#f7f7f7;--bg2:#ebebeb;--ink:#3B3B3B;--body:#1d1d1d;
   --mut:#666867;--line:#D3D3D3;
-  --hi:#ffe96a;--acc:#f1c157;--hd:#0d3d23;
+  --hi:#ffe96a;--acc:#f1c157;--hd:#1d1d1d;
   --gut:clamp(16px,4vw,40px);--max:1200px;
   --head:"Avenir Next",Avenir,"Century Gothic",Futura,"Trebuchet MS","Segoe UI",system-ui,sans-serif;
   --sans:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
@@ -26,10 +26,10 @@ html{-webkit-text-size-adjust:100%;scroll-padding-top:80px}
 @media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
 body{margin:0;background:var(--bg);color:var(--body);font:400 17px/1.7 var(--sans);-webkit-font-smoothing:antialiased;overflow-wrap:break-word}
 @media (min-width:1100px){body{font-size:18px}}
-img{display:block;max-width:100%;height:auto; filter: invert(1) saturate(0) contrast(1.1);}
+img{display:block;max-width:100%;height:auto; filter: grayscale(0.7) brightness(1.1); }
 a{color:inherit}
 strong,b{font-weight:700;color:var(--ink)}
-::selection{background:var(--hi);color:var(--ink)}
+::selection{background:var(--hi);color:var(--ink); }
 :focus-visible{outline:2px solid var(--acc);outline-offset:3px}
 .wrap{width:min(100% - 2*var(--gut),var(--max));margin-inline:auto}
 
@@ -248,7 +248,6 @@ footer .sep{margin:0 .6em}
         <li>Difficulty in handling decentralized compute</li>
         <li>Overregulation that stifles innovation</li>
         <li>Delays in oversight and enforcement</li>
-        <li>Regulatory capture</li>
         <li>Double standards</li>
       </ul>
       <h3>Solutions</h3>
@@ -367,7 +366,7 @@ footer .sep{margin:0 .6em}
     <div class="prose">
       <p>This framework will build on top an established blockchain platform rather than building a proprietary one.
         We are currently researching the use of Ethereum (most mature, open-source &amp; non-profit) or Cardano (mature, open-source, higher transactions-a-second, &amp; better architectural fit).
-        Post-quantum cryptography (PQC) remains a concern with both however community pressure is growing for it's implementation (with Ethereum taking the lead).</p>
+        Post-quantum cryptography (PQC) and Post-AI cryptography remains a concern with both however community pressure is growing for it's implementation (with Ethereum taking the lead).</p>
       <p><strong>Layered blockchain structure:</strong><br>
         <strong class="t"><span class="tp" data-tp="layer1">Layer-1</span></strong> Mainnet controls core
         components - utilizing cryptographic fingerprinting for data-heavy components.<br>
@@ -692,7 +691,10 @@ footer .sep{margin:0 .6em}
           <br><br>
           As frontier models grow in capability, so does their
           threat to cryptographic security, escalating the need of critical supervision and ongoing
-          reinforcement. This framework's many security layers reduce risk impact along with the transparency for multilateral monitoring.</li>
+          reinforcement. This framework's many security layers reduce risk impact along with the transparency for multilateral monitoring.
+          <br><br>
+          <i>If cryptographic security fails, global cybersecurity fails</i> - which is a negation to any AI governance plan and beyond.
+        </li>
         <li><strong>Limited insight into private model architectures.</strong><br>
           Model <span class="tp" data-tp="template">Templates</span> and Pre-Compute
           <span class="tp" data-tp="modules">Safety Modules</span> reduce, yet do not
